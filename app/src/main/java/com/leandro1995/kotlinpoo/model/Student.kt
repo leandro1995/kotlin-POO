@@ -19,4 +19,8 @@ class Student constructor(
     override fun register() {
         Log.e("registerStudent", "$name $surName $age $year $type $shortHair")
     }
+
+    fun hairCutText(): String {
+        return if (shortHair) "Valido corte de cabello" else "No valido el corte de cabello"
+    }
 }

@@ -1,7 +1,6 @@
 package com.leandro1995.kotlinpoo.adapter
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,6 +35,8 @@ class StudentAdapter constructor(private val studentList: MutableList<Student>) 
                 holder.itemView.categoryText.text = it
             }
         }
+
+        holder.itemView.hairCutText.text = studentList[position].hairCutText()
     }
 
     class StudentHolder constructor(view: View) : RecyclerView.ViewHolder(view)
