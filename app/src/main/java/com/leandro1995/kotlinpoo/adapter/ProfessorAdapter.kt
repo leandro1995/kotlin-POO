@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.leandro1995.kotlinpoo.R
 import com.leandro1995.kotlinpoo.model.Professor
-import com.leandro1995.kotlinpoo.model.Student
 import kotlinx.android.synthetic.main.item_professor.view.*
+import kotlinx.android.synthetic.main.item_professor.view.nameText
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class ProfessorAdapter constructor(private val professorList: MutableList<Professor>) :
     RecyclerView.Adapter<ProfessorAdapter.ProfessorHolder>() {
@@ -27,7 +30,14 @@ class ProfessorAdapter constructor(private val professorList: MutableList<Profes
     override fun onBindViewHolder(holder: ProfessorHolder, position: Int) {
         holder.itemView.nameText.text =
             "${professorList[position].name} ${professorList[position].surName}"
+
         holder.itemView.courseText.text = professorList[position].course
+
+        GlobalScope.launch(Dispatchers.Main) {
+            professorList[position].categoryValidity().let {
+                holder.itemView.categoryText.text = it
+            }
+        }
     }
 
     class ProfessorHolder constructor(view: View) : RecyclerView.ViewHolder(view)
