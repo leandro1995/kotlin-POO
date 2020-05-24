@@ -2,19 +2,26 @@ package com.leandro1995.kotlinpoo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.leandro1995.kotlinpoo.adapter.ProfessorAdapter
 import com.leandro1995.kotlinpoo.model.Professor
 import com.leandro1995.kotlinpoo.model.Student
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private var studentList = mutableListOf<Student>()
     private var professorList = mutableListOf<Professor>()
 
+    private lateinit var professorAdapter: ProfessorAdapter
+    private lateinit var professorLayoutManager: LinearLayoutManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         register()
+        classroomList()
     }
 
     private fun register() {
@@ -72,5 +79,20 @@ class MainActivity : AppCompatActivity() {
                 shortHair = true
             )
         )
+    }
+
+    private fun classroomList() {
+        professorLayoutManager = LinearLayoutManager(this).apply {
+            orientation = LinearLayoutManager.VERTICAL
+        }
+
+        professorAdapter = ProfessorAdapter(professorList = professorList)
+
+        professorRecycler.apply {
+            layoutManager = professorLayoutManager
+            adapter = professorAdapter
+        }
+
+        professorAdapter.notifyDataSetChanged()
     }
 }

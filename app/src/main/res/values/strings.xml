@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">KotlinPoo</string>
+
+    <!-- Text -->
+    <string name="professor_text">Profesor</string>
+    <string name="student_text">Alumno</string>
+
 </resources>
