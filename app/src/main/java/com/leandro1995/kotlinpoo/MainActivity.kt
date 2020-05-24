@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leandro1995.kotlinpoo.adapter.ProfessorAdapter
+import com.leandro1995.kotlinpoo.adapter.StudentAdapter
 import com.leandro1995.kotlinpoo.model.Professor
 import com.leandro1995.kotlinpoo.model.Student
 import kotlinx.android.synthetic.main.activity_main.*
@@ -15,6 +16,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var professorAdapter: ProfessorAdapter
     private lateinit var professorLayoutManager: LinearLayoutManager
+    private lateinit var studentAdapter: StudentAdapter
+    private lateinit var studentLayoutManager: LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,5 +97,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         professorAdapter.notifyDataSetChanged()
+
+        studentLayoutManager = LinearLayoutManager(this).apply {
+            orientation = LinearLayoutManager.VERTICAL
+        }
+
+        studentAdapter = StudentAdapter(studentList = studentList)
+
+        studentRecycler.apply {
+            layoutManager = studentLayoutManager
+            adapter = studentAdapter
+        }
+
+        studentAdapter.notifyDataSetChanged()
     }
 }
